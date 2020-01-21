@@ -164,13 +164,13 @@ let balls = {
             this.speedYellow = this.speedYellow;
             this.y += this.speedYellow;
         };
-        if (this.round == 5) {
+        if (this.round == 4) {
             this.round = 0;
             this.speedRed += 2;
             this.speedYellow += 2;
             this.radius -= 1;
-            if (this.radius == 9)
-                this.radius = 9;
+            if (this.radius == 8)
+                this.radius = 8;
         }
 
 
