@@ -1,0 +1,15 @@
+body{
+    font-family: 'VT323', monospace;
+    background-color: black;
+    color: red;
+}
+hr{
+    color: white;
+    
+}
+button{
+    width: 100px;
+}
+i{
+    width: 3em;
+}
