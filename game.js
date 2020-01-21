@@ -12,16 +12,16 @@ let plosina = {
     posun: 40,
     x: canvas.width / 3,
     y: canvas.height - 30,
-    points: 0,
+    points: 0, //Score
     pomocna: 0,
-    restart: 0,
-    round: 0,
+    restart: 0, //Pomocná proměnná pro zabránění vstupu z klávesnice při startu a konci hry
+    round: 0, // Kola pro následné přidání rychlosti
 // Interval pro padání kuliček
     start: function () {
         this.startTime = new Date();
         this.timer = setInterval(() => {
             repaint();
-            //Vypisování akutálního skore a času
+            //Vypisování akutálního skore a času na canvas
             if(plosina.restart == 1){
                 ctx.fillStyle = 'red';
                 ctx.font = '30px VT323';
@@ -29,10 +29,7 @@ let plosina = {
                let actualTime = new Date();
                 let time = actualTime.getTime() - this.startTime.getTime();
                 ctx.fillText(`Time: ${time/1000}`, 20, 40);
-            }
-                
-            
-            
+            }                 
             balls.paint();
         }, 20);
     },
@@ -91,14 +88,14 @@ let plosina = {
         let time = actualTime.getTime() - this.startTime.getTime();
         ctx.fillText(`Time: ${time/1000}`, 140, (canvas.height / 2) + 100);  
         ctx.font = '30px VT323'; 
-        ctx.fillText(`Press \"f5\" to restart`, 130, 470);
+        ctx.fillText(`Press \"F5\" to restart`, 130, 470);
         this.restart = 2;
     },
     //Funce detekce žluté kuličky
     plus: function () {
         balls.round++;
         balls.y = 550;
-        this.points++;
+        this.points++; //Přidání score
         this.pomocna++;
         this.audio = new Audio('point.wav');
         this.audio.play();
@@ -127,11 +124,11 @@ function clearCanvas(fillColor) {
         plosina.stop();
     }
     //Kontrola kolize
-    if (balls.collision(plosina)) {
-        if (balls.color == 'yellow') {
+    if (balls.y -5 >= (canvas.height - 30 - plosina.vyska) && balls.x >= plosina.x && balls.x <= plosina.x +plosina.delka) {
+        if (balls.color == 'yellow') { //Kolize žluté kuličky
             plosina.plus();
         }
-        if (balls.color == 'red') {
+        if (balls.color == 'red') {// Kolize červené kuličky
             console.log("cervena")
             plosina.stop();
         }
@@ -139,7 +136,7 @@ function clearCanvas(fillColor) {
 }
 
 function repaint() {
-    clearCanvas("black");
+    clearCanvas("black"); //Barva překreslení canvasu
 }
 // Objekt kuličky
 let balls = {
@@ -183,21 +180,6 @@ let balls = {
             this.color = (Math.random() >= 0.7) ? 'red' : 'yellow';
             this.y = 0;
         }
-    },
-    //Funkce pro detekti kuličky s plošinou
-    collision: function (rect) {
-        var distX = Math.abs(this.x - rect.x - rect.delka / 2);
-        var distY = Math.abs(this.y - rect.y - rect.vyska / 2);
-
-        if (distX > (rect.delka / 2 + this.radius)) { return false; }
-        if (distY > (rect.vyska / 2 + this.radius)) { return false; }
-
-        if (distX <= (rect.delka / 2)) { return true; }
-        if (distY <= (rect.vyska / 2)) { return true; }
-
-        var dx = distX - rect.delka / 2;
-        var dy = distY - rect.vyska / 2;
-        return (dx * dx + dy * dy <= (this.radius ** 2));
     },
 }
 //Spuštění hry
