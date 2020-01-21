@@ -167,8 +167,8 @@ let balls = {
         if (this.round == 5) {
             this.round = 0;
             this.speedRed += 2;
-            this.speedYellow += 1;
-            this.radius -= 0.5;
+            this.speedYellow += 2;
+            this.radius -= 1;
             if (this.radius == 9)
                 this.radius = 9;
         }
