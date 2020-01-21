@@ -1,3 +1,4 @@
+//Nastavení ID
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 const start = document.getElementById('start');
@@ -5,6 +6,7 @@ const left = document.getElementById('left');
 const right = document.getElementById('right');
 // Objekt posouvací plošiny
 let plosina = {
+    //Nastavení proměnných pro plošinu
     delka: 170,
     vyska: 15,
     posun: 40,
@@ -19,7 +21,7 @@ let plosina = {
         this.startTime = new Date();
         this.timer = setInterval(() => {
             repaint();
-            
+            //Vypisování akutálního skore a času
             if(plosina.restart == 1){
                 ctx.fillStyle = 'red';
                 ctx.font = '30px VT323';
@@ -44,21 +46,21 @@ let plosina = {
     //Switch k ovládání klávesnicí
     move: function (event) {
         switch (event.code) {
-            case 'ArrowLeft':
+            case 'ArrowLeft': //Levá šipka
                 if (this.x >= 0)
                     plosina.x -= this.posun;
                 else
                     break;
 
                 break;
-            case 'ArrowRight':
+            case 'ArrowRight'://Pravá šipka
                 if (!(this.x >= (canvas.width - this.delka)))
                     plosina.x += this.posun;
                 else
                     break;
 
                 break;
-            case 'Enter':
+            case 'Enter'://Enter
                 if (this.restart == 0) {
                     plosina.restart = 1;
                     repaint();
@@ -71,6 +73,7 @@ let plosina = {
     },
     //Funkce při konci hry
     stop: function () {
+        //Zastavení intervalu
         clearInterval(this.timer);
         this.timer = null;
         ctx.fillStyle = 'black';
@@ -119,10 +122,11 @@ function clearCanvas(fillColor) {
     if (balls.y > 473 && balls.y < 500 && balls.color == 'yellow') {
         plosina.pomocna++;
     }
-
+//Kontrola zda-li "neporpadla" žlutá kulička
     if (plosina.pomocna > plosina.points) {
         plosina.stop();
     }
+    //Kontrola kolize
     if (balls.collision(plosina)) {
         if (balls.color == 'yellow') {
             plosina.plus();
@@ -141,7 +145,7 @@ function repaint() {
 let balls = {
     ctx: canvas.getContext("2d"),
     x: Math.round(Math.random() * plosina.y),
-    speedRed: 12,
+    speedRed: 10,
     speedYellow: 8,
     radius: 15,
     color: (Math.random() >= 0.7) ? 'red' : 'yellow',
@@ -149,6 +153,7 @@ let balls = {
     round: 0,
 // Funkce vykresluje kuličky a mění proměnné
     paint: function () {
+        //Vykreslení kuličky
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
@@ -164,13 +169,12 @@ let balls = {
             this.speedYellow = this.speedYellow;
             this.y += this.speedYellow;
         };
-        if (this.round == 4) {
+        //Zrychlení kuliček
+        if (this.round == 5) {
             this.round = 0;
             this.speedRed += 2;
-            this.speedYellow += 2;
-            this.radius -= 1;
-            if (this.radius == 8)
-                this.radius = 8;
+            this.speedYellow += 1;
+   
         }
 
 
