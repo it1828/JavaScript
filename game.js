@@ -25,7 +25,7 @@ let plosina = {
             if(plosina.restart == 1){
                 ctx.fillStyle = 'red';
                 ctx.font = '30px VT323';
-                ctx.fillText(`Score: ${plosina.points * 10}`, canvas.width - 150, 40);
+                ctx.fillText(`Score: ${plosina.points}`, canvas.width - 150, 40);
                let actualTime = new Date();
                 let time = actualTime.getTime() - this.startTime.getTime();
                 ctx.fillText(`Time: ${time/1000}`, 20, 40);
@@ -82,7 +82,7 @@ let plosina = {
         ctx.font = '100px VT323';
         ctx.fillText(`Game over`, 75, canvas.height / 2);
         ctx.font = '50px VT323';
-        ctx.fillText(`Score: ${plosina.points * 10}`, 160, (canvas.height / 2) + 50);
+        ctx.fillText(`Score: ${plosina.points}`, 160, (canvas.height / 2) + 50);
         balls.y = 550;
         start.innerHTML = "You failed :(";
         this.audio = new Audio('end.wav');
@@ -172,8 +172,8 @@ let balls = {
         //Zrychlení kuliček
         if (this.round == 5) {
             this.round = 0;
-            this.speedRed += 2;
-            this.speedYellow += 1;
+            this.speedRed += 1;
+            this.speedYellow += 2;
    
         }
 
