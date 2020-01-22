@@ -142,7 +142,7 @@ function repaint() {
 let balls = {
     ctx: canvas.getContext("2d"),
     x: Math.round(Math.random() * plosina.y),
-    speedRed: 10,
+    speedRed: 6,
     speedYellow: 8,
     radius: 15,
     color: (Math.random() >= 0.7) ? 'red' : 'yellow',
@@ -167,7 +167,7 @@ let balls = {
             this.y += this.speedYellow;
         };
         //Zrychlení kuliček
-        if (this.round == 5) {
+        if (this.round == 4) {
             this.round = 0;
             this.speedRed += 1;
             this.speedYellow += 2;
