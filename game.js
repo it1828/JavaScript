@@ -7,7 +7,7 @@ const right = document.getElementById('right');
 // Objekt posouvací plošiny
 let plosina = {
     //Nastavení proměnných pro plošinu
-    delka: 170,
+    delka: 120,
     vyska: 15,
     posun: 40,
     x: canvas.width / 3,
