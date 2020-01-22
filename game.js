@@ -170,7 +170,7 @@ let balls = {
         if (this.round == 4) {
             this.round = 0;
             this.speedRed += 1;
-            this.speedYellow += 2;
+            this.speedYellow += 1;
    
         }
 
