@@ -4,10 +4,11 @@ let ctx = canvas.getContext("2d");
 const start = document.getElementById('start');
 const left = document.getElementById('left');
 const right = document.getElementById('right');
+const formDelka =  document.getElementById("formDelka");
 // Objekt posouvací plošiny
 let plosina = {
     //Nastavení proměnných pro plošinu
-    delka: 120,
+    delka: 0,
     vyska: 15,
     posun: 40,
     x: canvas.width / 3,
@@ -31,7 +32,7 @@ let plosina = {
                 ctx.fillText(`Time: ${time/1000}`, 20, 40);
             }                 
             balls.paint();
-        }, 20);
+        }, 30);
     },
 // Vykreslení plošiny
     paint: function () {
@@ -169,8 +170,8 @@ let balls = {
         //Zrychlení kuliček
         if (this.round == 4) {
             this.round = 0;
-            this.speedRed += 1;
-            this.speedYellow += 1;
+            this.speedRed += 2;
+            this.speedYellow += 2;
    
         }
 
@@ -185,6 +186,10 @@ let balls = {
 //Spuštění hry
 start.addEventListener('click', () => {
     if (plosina.restart == 0) {
+        if( formDelka.value >= 50 &&  formDelka.value <=200)
+            plosina.delka = formDelka.value;
+        else
+            plosina.delka = 140;
         plosina.restart = 1;
         repaint();
         plosina.paint();
