@@ -186,10 +186,10 @@ let balls = {
 //Spuštění hry
 start.addEventListener('click', () => {
     if (plosina.restart == 0) {
-        if( formDelka.value >= 50 &&  formDelka.value <=200)
+        if( formDelka.value >= 100 &&  formDelka.value <=200)
             plosina.delka = formDelka.value;
         else
-            plosina.delka = 140;
+            plosina.delka = 150;
         plosina.restart = 1;
         repaint();
         plosina.paint();
